@@ -3,25 +3,28 @@ import csv
 import json
 import pandas as pd
 import pymongo
+from psaw import PushshiftAPI
+
+api = PushshiftAPI()
+
 
 input = input('Enter company name: ')
-url = 'https://newsapi.org/v2/everything?q=' + input + '&pageSize=100&apiKey=efd324e53e494216b672fcea329bb317'
-
-response = requests.get(url)
-jsonRes = response.json()
+news = list(api.search_submissions(subreddit='news',
+                                filter=['title', 'url', 'num_comments', 'author', 'score', 'created_utc'],
+                                limit=150000))
 
 myclient = pymongo.MongoClient("18.219.233.150:27017")
 database = myclient['fibstock']
 collection = database['news']
 
 coll = []
-for res in jsonRes.get('articles'):
-    row = {
-        'title': res.get('title'),
-        'link': res.get('url'),
-        'publishedAt': res.get("publishedAt")
-    }
-    coll.append(row)
+for submission in news:
+    coll.append({
+        'title': submission.title,
+        'link': submission.url,
+        'publishedAt': submission.created_utc,
+        'author': submission.author
+    })
 
 collection.insert_many(coll)
 

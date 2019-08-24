@@ -19,7 +19,7 @@ mongoClient = pymongo.MongoClient("mongodb://18.219.233.150:27017")
 fibstock = mongoClient["fibstock"]
 
 print("Collecting data from db:")
-trainingDataCursor = fibstock.trainingData.find()
+trainingDataCursor = fibstock.train.find()
 
 trainingData = []
 
@@ -28,6 +28,40 @@ for doc in trainingDataCursor:
 
 df = pd.DataFrame.from_dict(trainingData)
 display(df)
+
+contextCursor = fibstock.trainContext.find()
+
+print("Collecting context data...")
+
+contextData = []
+
+for doc in contextCursor:
+    contextData.append(doc)
+
+df_context = pd.DataFrame.from_dict(contextData)
+display(df_context)
+
+nb_context = MultinomialNB(alpha = 0.36)
+cvec_context = CountVectorizer(ngram_range=(1, 3))
+df_context["isRelevant"] = df_context["isRelevant"].map({False: 0, True: 1})
+
+X2 = df_context["title"]
+y2 = df_context["isRelevant"]
+
+print("Training context model:")
+
+X2_train, X2_test, y2_train, y2_test = train_test_split(X2,
+                                                    y2,
+                                                    random_state=42,
+                                                    stratify=y2)
+cvec_context.fit(X2_train)
+
+X2cvec_train = cvec_context.transform(X2_train)
+X2cvec_test = cvec_context.transform(X2_test)
+
+nb_context.fit(X2cvec_train, y2_train)
+print("score:")
+print(nb_context.score(X2cvec_test, y2_test))
 
 nb = MultinomialNB(alpha = 0.36)
 cvec = CountVectorizer(ngram_range=(1, 3))
@@ -45,6 +79,7 @@ X_train, X_test, y_train, y_test = train_test_split(X,
 
 # Fit and transform the vectorizor
 cvec.fit(X_train)
+
 
 Xcvec_train = cvec.transform(X_train)
 Xcvec_test = cvec.transform(X_test)
@@ -80,20 +115,33 @@ for doc in fibstock.companies.find():
     companyNames.append(doc["name"])
 
 modeledNews = []
+context_vec = cvec_context.transform(df_news["title"])
+context_preds = nb_context.predict(context_vec)
+
 for i in range(len(news_preds)):
     mentions = []
     for name in companyNames:
         if (name.lower() in news[i]["title"].lower()):
             mentions.append(name)
     
-    for mention in mentions:
-        fibstock.companies[mention].news.insert_one({
+
+    if (context_preds[i] == 1):
+        modeledNews.append({
             'title': news[i]["title"],
             'link': news[i]["link"],
             'publishedAt': news[i]["publishedAt"],
-            'isFake': False if news_preds[i] == 0 else True
+            'isFake': False if news_preds[i] == 0 else True,
+            'mentions': mentions
         })
 
+fibstock.modeledNews.insert_many(modeledNews)
 
+count = {False: 0, True:0}
+for doc in modeledNews:
+    count[doc["isFake"]] += 1
+
+print(count)
+print("score:")
+print(count[False] / (count[False] + count[True]))
 
 
