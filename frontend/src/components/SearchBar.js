@@ -1,8 +1,11 @@
 import React from 'react';
 import {debounce} from 'lodash';
+import logo from '../assets/FibSTOCK_M.png';
 import '../styles/SearchBar.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+
 
 export default class SearchBar extends React.Component {
     constructor(props){
@@ -37,7 +40,11 @@ export default class SearchBar extends React.Component {
         // Delayed logic goes here
         const { text } = this.state;
         console.log(text)
-      }
+    }
+
+    redirect = () =>{
+        this.props.history.push(`/company/:${this.state.text}`);
+    }
 
     renderSuggestions () {
         const { suggestions, items } = this.state;
@@ -63,13 +70,16 @@ export default class SearchBar extends React.Component {
         const { text } = this.state;
 
         return (
-            <div className="SearchBox">
-                <input value={text} onChange={this.onTextChanged} type="text" placeholder="Type Company Name" />
-                <button value="" onClick={(e) => this.props.onGetClick(text)} type="text">
-                    <FontAwesomeIcon icon={faSearch} />
-                </button>
-                {this.renderSuggestions()}
-            </div>
+            <div>
+                <img src={logo} className="App-logo" alt="logo" />
+                <div className="SearchBox">
+                    <input value={text} onChange={this.onTextChanged} type="text" placeholder="Type Company Name" />
+                        <button value="" onClick={() => {this.redirect()}} type="text">
+                            <FontAwesomeIcon icon={faSearch} />
+                        </button>
+                    {this.renderSuggestions()}
+                </div>
+            </div> 
         )
     }
 }
