@@ -49,6 +49,8 @@ export default function FakeNews() {
     const news = newsList;
     // const classes = useStyles();
     return (
+        <div>
+            <h3>News</h3>
         <ul>
             {news.map((item) => <li key={item.title}>
             <Card className="card">
@@ -56,7 +58,6 @@ export default function FakeNews() {
             <Typography className='title'>{item.title}</Typography>
             </CardContent>
             <CardActions  className='learnmore'>
-
                 <div className='publishdate'>{item.publishedAt}</div>
                 <a href={item.link} target="_blank">
                     <button className='btn'>
@@ -65,8 +66,8 @@ export default function FakeNews() {
                 </a>
             </CardActions>
             </Card>
-                
-                </li>)}
+            </li>)}
         </ul>
+        </div>
     )
 }

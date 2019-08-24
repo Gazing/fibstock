@@ -1,9 +1,16 @@
 ul {
+    width:100%;
+    padding: 10px;
     list-style-type: none;
 }
+
+li {
+    margin-left:0px;
+}
+
 .card{
     /* min-width: 275; */
-    width: 80%;
+    width: 95%;
     margin-bottom: 10px;
     text-align: left;
 }
@@ -27,7 +34,7 @@ ul {
 }
 
 .icon {
-    color: purple;
+    color: #6c4df7;
     font-size: 1.5em;
     border-left: none;
 }

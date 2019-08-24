@@ -1,29 +1,29 @@
 .App-logo {
-    margin-top: 40px;
+    margin-top: 20px;
     height: 30px;
 }
 .ToolBar {
     position: relative;
     top: 0px;
-    border: 2px solid black;
+    border: 1px solid black;
     width: 100%;
-    height: 100px;
+    height: 70px;
 }
 
 .NewsContainer {
+    background-color:#f2f6fa;
     position: absolute;
     left: 0px;
-    border: 2px solid black;
-    width: 40%;
+    border: 1px solid grey;
+    width: 35%;
     height: 90%;
-    background: red;
 }
 
 .ChartContainer {
+    background-color:#f2f6fa;
     position: absolute;
-    border: 2px solid black;
+    border: 1px solid black;
     right:0px;
-    width: 60%;
+    width: 65%;
     height: 90%;
-    background: Blue;
 }
