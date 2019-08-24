@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
 import { border } from '@material-ui/system';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { getNewsForCompany } from "../api/fibstockAPI";
 
 const newsList = [
     {
@@ -64,13 +65,12 @@ const newsList = [
     }
 ]
 
-const news = newsList;
-
 export default class FakeNews extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
           text: this.props.query,
+          news: []
         }
       }
 
@@ -82,13 +82,23 @@ export default class FakeNews extends React.Component {
         console.log(this.props.query)
 
     }
+
+    componentDidMount() {
+        getNewsForCompany(this.props.query).then(res => {
+            res.json().then(json => {
+                console.log(json);
+                this.setState({news: json});
+            })
+        })
+    }
+
     // const classes = useStyles();
     render(){
         return (
             <div>
                 <h3>News</h3>
                 <ul>
-                    {news.map((item) => 
+                    {this.state.news.map((item) => 
                         <li key={item.title}>
                             <Card className="card">
                             <CardContent>

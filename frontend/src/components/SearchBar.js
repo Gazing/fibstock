@@ -43,9 +43,12 @@ export default class SearchBar extends React.Component {
         const { text } = this.state;
         api(text).then(res => {
             res.json().then(json => {
+                console.log(json)
                 this.setState({suggestions: json});
+        
             })
         })
+
     }
 
     redirect = () =>{
@@ -60,7 +63,7 @@ export default class SearchBar extends React.Component {
         } 
         return (
             <ul>
-                {suggestions.map((item) => <li onClick={() => this.suggestionSelected(item)}>{item}</li>)}
+                {suggestions.map((item, i) => <li key={i.toString()} onClick={() => this.suggestionSelected(item.name)}>{item.name}</li>)}
             </ul>
         );
     }
