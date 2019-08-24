@@ -8,11 +8,23 @@ li {
     margin-left:0px;
 }
 
+h3 {
+    float: left;
+    margin-left: 30px;
+    /* color: #633974; */
+    color: #626567;
+    font-weight: bold;
+}
+
 .card{
     width: 95%;
     margin-bottom: 10px;
     text-align: left;    
     font-family: Tahoma, Geneva, sans-serif;
+}
+
+.card:hover{
+    background: #A9A2F6;
 }
 
 .bullet {

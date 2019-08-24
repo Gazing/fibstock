@@ -11,6 +11,7 @@
 }
 
 .NewsContainer {
+    display: flex;
     background-color:#f2f6fa;
     position: absolute;
     left: 0px;

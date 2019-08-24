@@ -40,6 +40,26 @@ const newsList = [
     'title': 'Acorn',
     'link': 'https://twitter.com/',
     'publishedAt': '2019-01-01'
+    },
+    {
+    'title': 'Acorn',
+    'link': 'https://twitter.com/',
+    'publishedAt': '2019-01-01'
+    },
+    {
+    'title': 'Acorn',
+    'link': 'https://twitter.com/',
+    'publishedAt': '2019-01-01'
+    },
+    {
+    'title': 'Acorn',
+    'link': 'https://twitter.com/',
+    'publishedAt': '2019-01-01'
+    },
+    {
+    'title': 'Acorn',
+    'link': 'https://twitter.com/',
+    'publishedAt': '2019-01-01'
     }
 ]
 
