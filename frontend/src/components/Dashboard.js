@@ -18,11 +18,11 @@ export default class Dashboard extends React.Component {
 render(){
     return (
         <div>
-        <div className="ToolBar"><Link to="/"><img src={logo} className="App-logo" alt="logo" /></Link></div>
-        <div className="NewsContainer">
-            <FakeNews />
-        </div>
-        <div className="ChartContainer"></div>
+            <div className="ToolBar"><Link to="/"><img src={logo} className="App-logo" alt="logo" /></Link></div>
+            <div className="NewsContainer">
+                <FakeNews />
+            </div>
+            <div className="ChartContainer"></div>
         </div>
       );
 }
