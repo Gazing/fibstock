@@ -25,7 +25,7 @@ if len(dict) > 1:
     company = input("Enter your code here: ").upper()
 
 companyData = {
-    "function": "TIME_SERIES_MONTHLY_ADJUSTED",
+    "function": "TIME_SERIES_DAILY",
     "symbol": company,
     "apikey": "T2BNSYRDVEE0BHYF"
 }

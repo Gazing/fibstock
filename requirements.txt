@@ -5,3 +5,4 @@ scikit-learn
 pandas
 django
 pymongo
+django-cors-headers
