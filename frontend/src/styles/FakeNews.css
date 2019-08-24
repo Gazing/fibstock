@@ -1,0 +1,43 @@
+ul {
+    list-style-type: none;
+}
+.card{
+    /* min-width: 275; */
+    width: 80%;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.bullet {
+    display: 'inline-block';
+    margin: '0 2px';
+    transform: 'scale(0.8)';
+}
+
+.title {
+    font-size: 12;
+}
+
+.publishdate {
+    float: left;
+}
+
+.learnmore {
+    float: right;
+}
+
+.icon {
+    color: purple;
+    font-size: 1.5em;
+    border-left: none;
+}
+
+.icon:hover {
+    font-size: 2em;
+    transition: cubic-bezier();
+    transition-duration: 0.5s;
+}
+
+.btn{
+    border: none;
+}
