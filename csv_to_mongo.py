@@ -6,12 +6,12 @@ import pymongo
 import sys, getopt, pprint
 
 #CSV to JSON Conversion
-csvfile = open('./data/fbFake.csv', 'r')
+csvfile = open('./data/trainReal.csv', 'r', encoding="ISO-8859-1")
 reader = csv.DictReader( csvfile )
 myclient = pymongo.MongoClient("18.219.233.150:27017")
 database = myclient['fibstock']
-collection = database['train']
-header= ["title", "link", "publishedAt", "isFake"]
+collection = database['trainContext']
+header= ["title", "link", "publishedAt", "isRelevant"]
 
 req = []
 
@@ -28,6 +28,8 @@ for each in reader:
             each[field] =  each[field].replace('  ', ' ')
             # Transform all text to lowercase
             each[field] = each[field].lower()
+        if field == "isRelevant":
+            each[field] = True
         row[field]=each[field]
     req.append(row)
 collection.insert_many(req)

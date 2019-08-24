@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import pymongo
 from django.http import JsonResponse, HttpResponse
+import re
 
 # Create your views here.
 def index(request):
@@ -35,8 +36,12 @@ def getCompanies(request):
 
 def getNewsForCompany(request, *args, **kwargs):
     query = request.GET
+    limit = int(query["limit"]) if "limit" in query else 10
     company = kwargs["company"]
     mongoClient = pymongo.MongoClient("mongodb://18.219.233.150:27017")
     fibstock = mongoClient["fibstock"]
-    data = fibstock.companies[company].news.find({})
+    data = []
+    for doc in fibstock.modeledNews.find({ "mentions": { "$elemMatch": { "$regex": company, "$options": "i" } }}).sort([("publishedAt", -1)]).limit(limit):
+        doc["_id"] = str(doc["_id"])
+        data.append(doc)
     return JsonResponse(data, safe=False)
