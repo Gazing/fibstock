@@ -1,6 +1,7 @@
 import React from 'react';
 import {debounce} from 'lodash';
 import logo from '../assets/FibSTOCK_M.png';
+import Dashboard from '../components/Dashboard.js'
 import '../styles/SearchBar.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -12,7 +13,7 @@ export default class SearchBar extends React.Component {
         super(props);
         this.items = [];
         this.timeout =  0;
-        this.onChangeDebounced = debounce(this.onChangeDebounced, 2000)
+        this.onChangeDebounced = debounce(this.onChangeDebounced, 1000)
         
         this.state = {
             items: [],
@@ -75,7 +76,7 @@ export default class SearchBar extends React.Component {
                 <div className="SearchBox">
                     <input value={text} onChange={this.onTextChanged} type="text" placeholder="Type Company Name" />
                         <div className ="wrap">
-                            <Link to={`/company/${text}`} >
+                            <Link to={`/company/${text}`}>
                                 <FontAwesomeIcon icon={faSearch} style={{color: "#FFF"}}/>
                             </Link>
                         </div>

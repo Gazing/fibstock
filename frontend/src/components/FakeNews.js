@@ -9,6 +9,7 @@ import '../styles/FakeNews.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
 import { border } from '@material-ui/system';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const newsList = [
     {
@@ -69,11 +70,18 @@ export default class FakeNews extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-          text: '',
+          text: this.props.query,
         }
       }
 
+    componentWillMount(){
+        if (this.props.query===""){
+            return 
+        }
+        //const {text} = this.state;
+        console.log(this.props.query)
 
+    }
     // const classes = useStyles();
     render(){
         return (
