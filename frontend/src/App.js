@@ -9,8 +9,6 @@ class App extends React.Component {
     super(props)
     this.state = {
       sq: '',
-      totalRating: '',
-      rating: '',
     }
   }
 

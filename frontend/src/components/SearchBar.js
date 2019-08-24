@@ -4,7 +4,7 @@ import logo from '../assets/FibSTOCK_M.png';
 import '../styles/SearchBar.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 export default class SearchBar extends React.Component {
@@ -74,9 +74,11 @@ export default class SearchBar extends React.Component {
                 <img src={logo} className="App-logo" alt="logo" />
                 <div className="SearchBox">
                     <input value={text} onChange={this.onTextChanged} type="text" placeholder="Type Company Name" />
-                        <button value="" onClick={() => {this.redirect()}} type="text">
-                            <FontAwesomeIcon icon={faSearch} />
-                        </button>
+                        <div className ="wrap">
+                            <Link to={`/company/${text}`} >
+                                <FontAwesomeIcon icon={faSearch} style={{color: "#FFF"}}/>
+                            </Link>
+                        </div>
                     {this.renderSuggestions()}
                 </div>
             </div> 

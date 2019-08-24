@@ -59,11 +59,11 @@
     background-color: rgba(128,128,128,0.20)
 }
 
-.SearchBox button{
+.wrap{
+    padding: 17px 0;
     border-radius: 0px 70px 70px 0px;
     width: 10%;
     white-space: nowrap;
-    color: #fff;
     border: 0;
     cursor: pointer;
     background: #6c4df7;
@@ -71,7 +71,7 @@
     outline: none;
 }
 
-.SearchBox button:hover{
+.wrap:hover{
     background: #a9a2f6;
 }
 
