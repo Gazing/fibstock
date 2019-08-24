@@ -1,4 +1,5 @@
 import React from 'react';
+import {debounce} from 'lodash';
 import '../styles/SearchBar.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -7,6 +8,9 @@ export default class SearchBar extends React.Component {
     constructor(props){
         super(props);
         this.items = [];
+        this.timeout =  0;
+        this.onChangeDebounced = debounce(this.onChangeDebounced, 2000)
+        
         this.state = {
             items: [],
             suggestions: [],
@@ -17,37 +21,23 @@ export default class SearchBar extends React.Component {
 
     onTextChanged = (e) => {
         const value = e.target.value;
-        const { items } = this.state;
-
-        fetch("https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + value +"&apikey=T2BNSYRDVEE0BHYF")
-        .then(
-          (result) => {
-            console.log()
-            this.setState({
-              isLoaded: true,
-              items: result.symbol
-            });
-          },
-          // Note: it's important to handle errors here
-          // instead of a catch() block so that we don't swallow
-          // exceptions from actual bugs in components.
-          (error) => {
-            this.setState({
-              isLoaded: true,
-              error
-            });
-          }
-        )
-        console.log(items)
-
+        const { items, text } = this.state;
+        this.setState(() => ({suggestions, text: value}));
+        this.onChangeDebounced(e)
 
         let suggestions = [];
         if (value.length > 0){
             const regex = new RegExp(`^${value}`, 'i');
             suggestions = items.sort().filter(v => regex.test(v));
         } 
-        this.setState(() => ({suggestions, text: value}));
+        
     }
+
+    onChangeDebounced = (e) => {
+        // Delayed logic goes here
+        const { text } = this.state;
+        console.log(text)
+      }
 
     renderSuggestions () {
         const { suggestions, items } = this.state;
