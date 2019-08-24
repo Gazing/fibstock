@@ -6,7 +6,7 @@ import pymongo
 import sys, getopt, pprint
 
 #CSV to JSON Conversion
-csvfile = open('./data/trainFake.csv', 'r')
+csvfile = open('./data/fbFake.csv', 'r')
 reader = csv.DictReader( csvfile )
 myclient = pymongo.MongoClient("18.219.233.150:27017")
 database = myclient['fibstock']
