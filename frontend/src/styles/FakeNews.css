@@ -27,6 +27,10 @@ h3 {
     background: #A9A2F6;
 }
 
+.card:hover .btn{
+    background: #A9A2F6;
+}
+
 .bullet {
     display: 'inline-block';
     margin: '0 2px';

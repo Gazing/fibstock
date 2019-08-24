@@ -11,14 +11,13 @@
 }
 
 .NewsContainer {
-    display: flex;
-    flex-direction: column;
     background-color:#f2f6fa;
     position: absolute;
     left: 0px;
     border: 1px solid grey;
     width: 35%;
     height: 100%;
+    overflow: auto;
 }
 
 .ChartContainer {
@@ -28,4 +27,5 @@
     right:0px;
     width: 65%;
     height: 100%;
+    overflow: auto;
 }
