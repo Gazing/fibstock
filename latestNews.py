@@ -21,5 +21,5 @@ for res in jsonRes.get('articles'):
         'publishedAt': res.get("publishedAt")
     }
     collection.insert_one(row)
-print(collection)
+
 myclient.close()
