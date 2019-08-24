@@ -18,12 +18,10 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <div className="App-Component">
           <Router>
             <Route path="/" exact component={SearchBar} />
             <Route path="/company/:name" component={Dashboard} />
           </Router>
-        </div>
       </div>
     );
   }

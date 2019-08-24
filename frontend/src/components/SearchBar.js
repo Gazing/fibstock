@@ -70,7 +70,7 @@ export default class SearchBar extends React.Component {
         const { text } = this.state;
 
         return (
-            <div>
+            <div className ="App-Component">
                 <img src={logo} className="App-logo" alt="logo" />
                 <div className="SearchBox">
                     <input value={text} onChange={this.onTextChanged} type="text" placeholder="Type Company Name" />
