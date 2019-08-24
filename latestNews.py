@@ -14,12 +14,15 @@ myclient = pymongo.MongoClient("18.219.233.150:27017")
 database = myclient['fibstock']
 collection = database['news']
 
+coll = []
 for res in jsonRes.get('articles'):
     row = {
         'title': res.get('title'),
         'link': res.get('url'),
         'publishedAt': res.get("publishedAt")
     }
-    collection.insert_one(row)
+    coll.append(row)
+
+collection.insert_many(coll)
 
 myclient.close()
