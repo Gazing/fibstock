@@ -43,7 +43,6 @@ export default class SearchBar extends React.Component {
         const { text } = this.state;
         api(text).then(res => {
             res.json().then(json => {
-                console.log(json)
                 this.setState({suggestions: json});
             })
         })

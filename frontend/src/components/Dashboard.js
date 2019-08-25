@@ -17,16 +17,21 @@ export default class Dashboard extends React.Component {
     }
 
     componentDidMount() {
+        const queries = []
         getNewsForCompany(this.state.text).then(res => {
             res.json().then(json => {
-                console.log(json);
                 this.setState({news: json});
+                getSentimentAPI(json.map((item) => item.title).join(",")).then(result => { 
+                    result.json().then(data => {
+                        this.setState({sentimentData: data})
+                    })
+                })
             })
         })
     }
 
     render(){
-        
+        console.log(this.state.sentimentData)
         return (
             <div>
             <div className="ToolBar"><Link to="/"><img src={logo} className="App-logo" alt="logo" /></Link></div>
