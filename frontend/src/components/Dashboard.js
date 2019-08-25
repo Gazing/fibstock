@@ -4,14 +4,15 @@ import FakeNews from './FakeNews';
 import '../styles/Dashboard.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { getNewsForCompany } from "../api/fibstockAPI";
+import { getNewsForCompany, getSentimentAPI } from "../api/fibstockAPI";
 
 export default class Dashboard extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             text: this.props.match.params.name,
-            news: []
+            news: [],
+            sentimentData: []
         }
     }
 
