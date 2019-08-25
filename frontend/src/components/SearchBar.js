@@ -43,12 +43,24 @@ export default class SearchBar extends React.Component {
         const { text } = this.state;
         api(text).then(res => {
             res.json().then(json => {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 4efc93af05f17a38f8758f1cc683ee83c81da756
                 console.log(json)
                 this.setState({suggestions: json});
         
             })
         })
 
+<<<<<<< HEAD
+=======
+=======
+                this.setState({suggestions: json});
+            })
+        })
+>>>>>>> 24d2f8114f9e11940fd209d6a3c0464da30a52fe
+>>>>>>> 4efc93af05f17a38f8758f1cc683ee83c81da756
     }
 
     redirect = () =>{

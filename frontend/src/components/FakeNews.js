@@ -75,8 +75,6 @@ const newsList = [
     }
 ]
 
-const news = newsList;
-
 function displayFake(isFake){
     if (isFake){
         return 'Fake';
