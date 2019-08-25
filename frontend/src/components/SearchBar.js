@@ -6,6 +6,7 @@ import '../styles/SearchBar.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { api } from "../api/fibstockAPI";
 
 
 export default class SearchBar extends React.Component {
@@ -40,7 +41,12 @@ export default class SearchBar extends React.Component {
     onChangeDebounced = (e) => {
         // Delayed logic goes here
         const { text } = this.state;
-        console.log(text)
+        api(text).then(res => {
+            res.json().then(json => {
+                console.log(json)
+                this.setState({suggestions: json});
+            })
+        })
     }
 
     redirect = () =>{
@@ -55,7 +61,7 @@ export default class SearchBar extends React.Component {
         } 
         return (
             <ul>
-                {suggestions.map((item) => <li onClick={() => this.suggestionSelected(item)}>{item}</li>)}
+                {suggestions.map((item, i) => <li key={i.toString()} onClick={() => this.suggestionSelected(item.name)}>{item.name}</li>)}
             </ul>
         );
     }
