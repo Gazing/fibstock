@@ -2,15 +2,39 @@ import React, { Component } from 'react';
 import '../../node_modules/react-vis/dist/style.css';
 import {RadialChart} from 'react-vis';
 
-const data = [ {angle: 1}, 
-    {angle: 2}, 
-    {angle: 5},
-    {angle: 3}];
+
 
 class Donut extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+        data: this.props.sentimentData,
+    }
+  }
+
+  
     render() {
+      const mapper = {
+        'Mixed': 0,
+        'Negative': 0,
+        'Neutral': 0,
+        'Positive': 0
+      }
+      this.props.sentimentData.map((item => {
+        mapper['Mixed'] = mapper['Mixed'] + item.SentimentScore.Mixed
+        mapper['Negative'] = mapper['Negative'] + item.SentimentScore.Negative
+        mapper['Neutral'] = mapper['Neutral'] + item.SentimentScore.Neutral
+        mapper['Positive'] = mapper['Positive'] + item.SentimentScore.Positive
+      }))
+
+
+      const data = [ {angle: mapper['Mixed']}, 
+        {angle: mapper['Negative']}, 
+        {angle: mapper['Neutral']},
+        {angle: mapper['Positive']}];
 
     return (
+
       <div className="Donut">
         <RadialChart
             data={data}
@@ -22,6 +46,8 @@ class Donut extends Component {
             height={300}
             padAngle={0.04} />
       </div>
+     
+      
     );
   }
 }
