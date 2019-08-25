@@ -17,8 +17,7 @@ export default class FakeNews extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-          text: this.props.query,
-          news: [],
+          news: this.props.news,
         }
       }
 
@@ -45,7 +44,7 @@ export default class FakeNews extends React.Component {
             <div>
                 <h3>News</h3>
                 <ul>
-                    {this.state.news.map((item) => 
+                    {this.props.news.map((item) => 
                         <li key={item.title}>
                             <Card className="card" style={{borderLeftColor: item.isFake ? 'red' : 'green'}}>
                             <CardContent>
