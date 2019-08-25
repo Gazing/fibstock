@@ -42,9 +42,9 @@
 .SearchBox ul {
     list-style-type: none;
     text-align: left; 
-    margin: 0;
+    margin-top: 10px;
     padding: 0;
-    border-top: 1px solid grey;
+    border: 1px solid grey;
 }
 .SearchBox ul::before{
     content: ""
