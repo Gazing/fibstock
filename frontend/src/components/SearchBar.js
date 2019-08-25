@@ -14,7 +14,7 @@ export default class SearchBar extends React.Component {
         super(props);
         this.items = [];
         this.timeout =  0;
-        this.onChangeDebounced = debounce(this.onChangeDebounced, 1000)
+        this.onChangeDebounced = debounce(this.onChangeDebounced, 300)
         
         this.state = {
             items: [],
@@ -49,10 +49,6 @@ export default class SearchBar extends React.Component {
         })
     }
 
-    redirect = () =>{
-        this.props.history.push(`/company/:${this.state.text}`);
-    }
-
     renderSuggestions () {
         const { suggestions, items } = this.state;
 
@@ -71,6 +67,7 @@ export default class SearchBar extends React.Component {
             text: value,
             suggestions: [],
         }))
+        this.props.history.push(`/company/${value}`)
     }
 
     render () {
