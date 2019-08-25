@@ -1,3 +1,4 @@
+
 export function api (query) {
     return fetch("http://127.0.0.1:8000/api/companies?q=" + query);
 }

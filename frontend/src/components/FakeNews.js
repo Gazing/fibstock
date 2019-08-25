@@ -16,54 +16,71 @@ const newsList = [
     {
     'title': 'Google GoogleGoogle GoogleGoogle GoogleGoogle GoogleGoogle GoogleGoogle GoogleGoogle GoogleGoogle GoogleGoogle Google',
     'link': 'https://www.google.com/',
-    'publishedAt': '2019-01-01'
+    'publishedAt': '2019-01-01',
+    'isFake': true
     },
     {
     'title': 'Facebook',
     'link': 'https://www.facebook.com/',
-    'publishedAt': '2019-01-01'
+    'publishedAt': '2019-01-01',
+    'isFake': true
     },
     {
     'title': 'Acorn',
     'link': 'https://twitter.com/',
-    'publishedAt': '2019-01-01'
+    'publishedAt': '2019-01-01',
+    'isFake': true
     },
     {
     'title': 'Google Google',
     'link': 'https://www.google.com/',
-    'publishedAt': '2019-01-01'
+    'publishedAt': '2019-01-01',
+    'isFake': false
     },
     {
     'title': 'Facebook',
     'link': 'https://www.facebook.com/',
-    'publishedAt': '2019-01-01'
+    'publishedAt': '2019-01-01',
+    'isFake': false
     },
     {
     'title': 'Acorn',
     'link': 'https://twitter.com/',
-    'publishedAt': '2019-01-01'
+    'publishedAt': '2019-01-01',
+    'isFake': false
     },
     {
     'title': 'Acorn',
     'link': 'https://twitter.com/',
-    'publishedAt': '2019-01-01'
+    'publishedAt': '2019-01-01',
+    'isFake': false
     },
     {
     'title': 'Acorn',
     'link': 'https://twitter.com/',
-    'publishedAt': '2019-01-01'
+    'publishedAt': '2019-01-01',
+    'isFake': false
     },
     {
     'title': 'Acorn',
     'link': 'https://twitter.com/',
-    'publishedAt': '2019-01-01'
+    'publishedAt': '2019-01-01',
+    'isFake': false
     },
     {
     'title': 'Acorn',
     'link': 'https://twitter.com/',
-    'publishedAt': '2019-01-01'
+    'publishedAt': '2019-01-01',
+    'isFake': false
     }
 ]
+
+function displayFake(isFake){
+    if (isFake){
+        return 'Fake';
+    }
+    return 'Real';
+}
 
 export default class FakeNews extends React.Component {
     constructor(props) {
@@ -73,15 +90,6 @@ export default class FakeNews extends React.Component {
           news: []
         }
       }
-
-    componentWillMount(){
-        if (this.props.query===""){
-            return 
-        }
-        //const {text} = this.state;
-        console.log(this.props.query)
-
-    }
 
     componentDidMount() {
         getNewsForCompany(this.props.query).then(res => {
@@ -100,10 +108,13 @@ export default class FakeNews extends React.Component {
                 <ul>
                     {this.state.news.map((item) => 
                         <li key={item.title}>
-                            <Card className="card">
+                            <Card className="card" style={{borderLeftColor: item.isFake ? 'red' : 'green'}}>
                             <CardContent>
                             <Typography className='title'>{item.title}</Typography>
                             </CardContent>
+                            <div className='fakeReal' style={ { color: item.isFake ? 'red' : 'green'} } >
+                                {item.isFake ? 'Fake': 'Real'}
+                            </div>
                             <CardActions  className='learnmore'>
                                 <div className='publishdate'>{item.publishedAt}</div>
                                 <a href={item.link} target="_blank">
