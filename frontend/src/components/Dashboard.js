@@ -40,7 +40,9 @@ export default class Dashboard extends React.Component {
                 <FakeNews news={this.state.news}/>
             </div>
             <div className="ChartContainer">
-                <Donut sentimentData={this.state.sentimentData} />
+                <div className="DonutContainer">
+                    <Donut sentimentData={this.state.sentimentData} />
+                </div>
             </div>
             </div>
         );

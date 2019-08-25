@@ -29,3 +29,12 @@
     height: 100%;
     overflow: auto;
 }
+
+.DonutContainer{
+    background-color:#f2f6fa;
+    position: absolute;
+    top: 500px;
+    left: 10%;
+    width: 80%;
+    overflow: auto;
+}
