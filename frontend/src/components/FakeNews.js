@@ -12,93 +12,15 @@ import { border } from '@material-ui/system';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { getNewsForCompany } from "../api/fibstockAPI";
 
-const newsList = [
-    {
-    'title': 'Google GoogleGoogle GoogleGoogle GoogleGoogle GoogleGoogle GoogleGoogle GoogleGoogle GoogleGoogle GoogleGoogle Google',
-    'link': 'https://www.google.com/',
-    'publishedAt': '2019-01-01',
-    'isFake': true
-    },
-    {
-    'title': 'Facebook',
-    'link': 'https://www.facebook.com/',
-    'publishedAt': '2019-01-01',
-    'isFake': true
-    },
-    {
-    'title': 'Acorn',
-    'link': 'https://twitter.com/',
-    'publishedAt': '2019-01-01',
-    'isFake': true
-    },
-    {
-    'title': 'Google Google',
-    'link': 'https://www.google.com/',
-    'publishedAt': '2019-01-01',
-    'isFake': false
-    },
-    {
-    'title': 'Facebook',
-    'link': 'https://www.facebook.com/',
-    'publishedAt': '2019-01-01',
-    'isFake': false
-    },
-    {
-    'title': 'Acorn',
-    'link': 'https://twitter.com/',
-    'publishedAt': '2019-01-01',
-    'isFake': false
-    },
-    {
-    'title': 'Acorn',
-    'link': 'https://twitter.com/',
-    'publishedAt': '2019-01-01',
-    'isFake': false
-    },
-    {
-    'title': 'Acorn',
-    'link': 'https://twitter.com/',
-    'publishedAt': '2019-01-01',
-    'isFake': false
-    },
-    {
-    'title': 'Acorn',
-    'link': 'https://twitter.com/',
-    'publishedAt': '2019-01-01',
-    'isFake': false
-    },
-    {
-    'title': 'Acorn',
-    'link': 'https://twitter.com/',
-    'publishedAt': '2019-01-01',
-    'isFake': false
-    }
-]
-
-function displayFake(isFake){
-    if (isFake){
-        return 'Fake';
-    }
-    return 'Real';
-}
 
 export default class FakeNews extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-          text: this.props.query,
-          news: []
+          news: this.props.news,
         }
       }
 
-    componentDidMount() {
-        getNewsForCompany(this.props.query).then(res => {
-            res.json().then(json => {
-                console.log(json);
-                this.setState({news: json});
-            })
-        })
-    }
 
     // const classes = useStyles();
     render(){
@@ -106,7 +28,7 @@ export default class FakeNews extends React.Component {
             <div>
                 <h3>News</h3>
                 <ul>
-                    {this.state.news.map((item) => 
+                    {this.props.news.map((item) => 
                         <li key={item.title}>
                             <Card className="card" style={{borderLeftColor: item.isFake ? 'red' : 'green'}}>
                             <CardContent>
