@@ -37,7 +37,7 @@ export default class FakeNews extends React.Component {
                 <ul>
                     {this.props.news.map((item) => 
                         <li key={item.title}>
-                            <Card className="card" style={{borderLeftColor: item.isFake ? 'red' : 'green'}}>
+                            <Card className="card" style={{boxShadow: "none", borderLeftColor: item.isFake ? 'red' : 'green'}}>
                             <CardContent>
                             <Typography className='title'>{item.title}</Typography>
                             </CardContent>

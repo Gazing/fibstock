@@ -4,8 +4,9 @@ import FakeNews from './FakeNews';
 import '../styles/Dashboard.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { getNewsForCompany, getSentimentAPI } from "../api/fibstockAPI";
+import { getNewsForCompany, getSentimentAPI, api } from "../api/fibstockAPI";
 import Donut from './Donut';
+import { StockPlot } from './StockPlot'
 
 export default class Dashboard extends React.Component {
     constructor(props){
@@ -13,7 +14,8 @@ export default class Dashboard extends React.Component {
         this.state = {
             text: this.props.match.params.name,
             news: [],
-            sentimentData: []
+            sentimentData: [],
+            company: {}
         }
     }
 
@@ -29,6 +31,14 @@ export default class Dashboard extends React.Component {
                 })
             })
         })
+
+        api(this.state.text).then(res => {
+            res.json().then(json => {
+                this.setState({company: json[0]});
+            })
+        })
+
+
     }
 
     render(){
@@ -40,6 +50,9 @@ export default class Dashboard extends React.Component {
                 <FakeNews news={this.state.news}/>
             </div>
             <div className="ChartContainer">
+                <div>
+                    <StockPlot company={this.state.company.code} companyName={this.state.text} />
+                </div>
                 <div className="DonutContainer">
                     <Donut sentimentData={this.state.sentimentData} />
                 </div>
