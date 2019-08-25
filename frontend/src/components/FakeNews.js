@@ -17,18 +17,35 @@ export default class FakeNews extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-          news: this.props.news,
+          text: this.props.query,
+          news: [],
         }
       }
 
+      componentDidMount() {
+        getNewsForCompany(this.props.query).then(res => {
+            res.json().then(json => {
+                console.log(json);
+                this.setState({news: json});
+            })
+        })
+    }
 
-    // const classes = useStyles();
+    convertToDate(timestamp) {
+        let time = new Date(timestamp*1000);
+        var year = time.getFullYear();
+        var month = time.getMonth() + 1 < 10 ? '0' + (time.getMonth()+1) : time.getMonth();
+        var day = (time.getDate() < 10 ? '0' : '') + time.getDate();
+        var d = year + '-' + month + '-' + day;
+        return d;
+    }
+
     render(){
         return (
             <div>
                 <h3>News</h3>
                 <ul>
-                    {this.props.news.map((item) => 
+                    {this.state.news.map((item) => 
                         <li key={item.title}>
                             <Card className="card" style={{borderLeftColor: item.isFake ? 'red' : 'green'}}>
                             <CardContent>
@@ -38,7 +55,7 @@ export default class FakeNews extends React.Component {
                                 {item.isFake ? 'Fake': 'Real'}
                             </div>
                             <CardActions  className='learnmore'>
-                                <div className='publishdate'>{item.publishedAt}</div>
+                                <div className='publishdate'>{this.convertToDate(item.publishedAt)}</div>
                                 <a href={item.link} target="_blank">
                                     <button className='btn'>
                                         <FontAwesomeIcon className='icon' icon = { faLocationArrow } />
@@ -52,5 +69,4 @@ export default class FakeNews extends React.Component {
             </div>
         )
     }
-
 }
