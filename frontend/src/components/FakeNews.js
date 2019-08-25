@@ -21,15 +21,6 @@ export default class FakeNews extends React.Component {
         }
       }
 
-      componentDidMount() {
-        getNewsForCompany(this.props.query).then(res => {
-            res.json().then(json => {
-                console.log(json);
-                this.setState({news: json});
-            })
-        })
-    }
-
     convertToDate(timestamp) {
         let time = new Date(timestamp*1000);
         var year = time.getFullYear();
