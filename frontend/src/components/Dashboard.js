@@ -5,6 +5,7 @@ import '../styles/Dashboard.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { getNewsForCompany, getSentimentAPI } from "../api/fibstockAPI";
+import Donut from './Donut';
 
 export default class Dashboard extends React.Component {
     constructor(props){
@@ -38,7 +39,11 @@ export default class Dashboard extends React.Component {
             <div className="NewsContainer">
                 <FakeNews news={this.state.news}/>
             </div>
-            <div className="ChartContainer"></div>
+            <div className="ChartContainer">
+                <div className="DonutContainer">
+                    <Donut sentimentData={this.state.sentimentData} />
+                </div>
+            </div>
             </div>
         );
     }
