@@ -1,3 +1,4 @@
+
 import csv
 import json
 import pandas as pd
@@ -8,7 +9,8 @@ import sys, getopt, pprint
 #CSV to JSON Conversion
 csvfile = open('./data/trainReal.csv', 'r', encoding="ISO-8859-1")
 reader = csv.DictReader( csvfile )
-myclient = pymongo.MongoClient("18.219.233.150:27017")
+# myclient = pymongo.MongoClient("18.219.233.150:27017")
+myclient = pymongo.MongoClient("mongodb://127.0.0.1:27017")
 database = myclient['fibstock']
 collection = database['trainContext']
 header= ["title", "link", "publishedAt", "isRelevant"]

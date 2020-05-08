@@ -58,7 +58,7 @@ class Donut extends Component {
         {angle: mapper['Negative'], color:'#00a8a8'}, 
         {angle: mapper['Neutral'], color:'#00dfc2'},
         {angle: mapper['Positive'], color:'#73ffe7'}];
-      console.log(mapper)
+      // console.log(mapper)
 
     return (
       <div style={{"textAlign": "center", 'display': 'flex', 'flexDirection': 'column'}} >

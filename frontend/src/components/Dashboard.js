@@ -42,7 +42,7 @@ export default class Dashboard extends React.Component {
     }
 
     render(){
-        console.log(this.state.sentimentData)
+        // console.log(this.state.sentimentData)
         return (
             <div>
             <div className="ToolBar"><Link to="/"><img src={logo} className="App-logo" alt="logo" /></Link></div>

@@ -15,7 +15,8 @@ from sklearn import metrics
 from sklearn.metrics import accuracy_score, recall_score, precision_score, confusion_matrix
 
 
-mongoClient = pymongo.MongoClient("mongodb://18.219.233.150:27017")
+# mongoClient = pymongo.MongoClient("mongodb://18.219.233.150:27017")
+mongoClient = pymongo.MongoClient("mongodb://127.0.0.1:27017")
 fibstock = mongoClient["fibstock"]
 
 print("Collecting data from db:")
@@ -143,6 +144,3 @@ for doc in modeledNews:
 print(count)
 print("score:")
 print(count[False] / (count[False] + count[True]))
-
-
-

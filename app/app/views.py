@@ -9,7 +9,7 @@ def index(request):
 
 def getCompanies(request):
     query = request.GET
-    mongoClient = pymongo.MongoClient("mongodb://18.219.233.150:27017")
+    mongoClient = pymongo.MongoClient("mongodb://127.0.0.1:27017")
     fibstock = mongoClient["fibstock"]
     companies = []
     if ("q" not in query):
@@ -20,17 +20,21 @@ def getCompanies(request):
 
     companyQuery = query["q"]
     ids = {}
-    for doc in fibstock.companies.find({ "$text": { "$search": companyQuery } }):
-        doc["_id"] = str(doc["_id"])
-        ids[doc["_id"]] = 1
-        companies.append(doc)
+
+    # for doc in fibstock.companies.find({ "$text": { "$search": companyQuery } }):
+    #     print("===============")
+    #     print(doc)
+    #     doc["_id"] = str(doc["_id"])
+    #     ids[doc["_id"]] = 1
+    #     print(doc)
+    #     companies.append(doc)
 
     for doc in fibstock.companies.find({ "name": {'$regex': companyQuery, '$options': 'i'} }):
         doc["_id"] = str(doc["_id"])
         if (doc["_id"] in ids):
             continue
         companies.append(doc)
-
+    
     return JsonResponse(companies, safe=False)
     mongoClient.close()
 
@@ -38,7 +42,7 @@ def getNewsForCompany(request, *args, **kwargs):
     query = request.GET
     limit = int(query["limit"]) if "limit" in query else 10
     company = kwargs["company"]
-    mongoClient = pymongo.MongoClient("mongodb://18.219.233.150:27017")
+    mongoClient = pymongo.MongoClient("mongodb://127.0.0.1:27017")
     fibstock = mongoClient["fibstock"]
     data = []
     if ("isFake" not in query):

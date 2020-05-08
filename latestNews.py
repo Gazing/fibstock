@@ -9,11 +9,14 @@ api = PushshiftAPI()
 
 
 input = input('Enter company name: ')
+
 news = list(api.search_submissions(subreddit='news',
                                 filter=['title', 'url', 'num_comments', 'author', 'score', 'created_utc'],
                                 limit=150000))
-
-myclient = pymongo.MongoClient("18.219.233.150:27017")
+print("connecting to db")
+# myclient = pymongo.MongoClient("18.219.233.150:27017")
+myclient = pymongo.MongoClient("127.0.0.1:27017")
+print("database connected")
 database = myclient['fibstock']
 collection = database['news']
 

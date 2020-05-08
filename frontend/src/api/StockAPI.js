@@ -17,12 +17,12 @@ function paramsToQueryString(params) {
 }
 
 export function getFakeNewsForCompany(company) {
-    let url = 'http://18.188.57.31/api/companies/'+company+'/news';
+    // let url = 'http://18.188.57.31/api/companies/'+company+'/news';
+    let url = "http://127.0.0.1:8000/api/companies/" + company + "/news";
     let params = {
         isFake: true,
         limit: 99999
     };
 
     return fetch(url + "?" + paramsToQueryString(params));
-
 }

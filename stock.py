@@ -15,9 +15,9 @@ keywordData = {
 keywordRes = requests.get(url, params=keywordData).json()
 dict = {}
 
-for record in keywordRes['bestMatches']:
-    dict[record['1. symbol']] = record['2. name']
 
+print("========All codes=========")
+print(dict)
 if len(dict) > 1:
     print("Please choose a company code from following: ")
     for r in dict:

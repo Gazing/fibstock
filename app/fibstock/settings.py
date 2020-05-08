@@ -25,7 +25,7 @@ SECRET_KEY = 'kctm6hu%zx-1g&k5zf3^kio#(z*7n86@1^-a$@9stmstled=n+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fibstock-env.eba-k7ttmg5i.us-west-2.elasticbeanstalk.com']
 
 
 # Application definition
@@ -54,6 +54,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'fibstock.urls'
 
 CORS_ORIGIN_ALLOW_ALL=True
+CORS_ALLOW_CREDENTIALS = True
 
 TEMPLATES = [
     {
@@ -72,6 +73,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'fibstock.wsgi.application'
+# WSGI_APPLICATION = 'wsgi.application'
 
 
 # Database
@@ -122,3 +124,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')

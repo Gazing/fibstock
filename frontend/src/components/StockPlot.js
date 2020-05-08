@@ -20,8 +20,8 @@ function getNearstDate(stock, date) {
 
 export class StockPlot extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             points: [],
             fakeNews: []
@@ -48,9 +48,12 @@ export class StockPlot extends Component {
                 let maxCount = 0;
 
                 
-                
+            
                 getFakeNewsForCompany(this.props.companyName).then(res => {
                     res.json().then(json => {
+                        console.log("json");
+                        console.log(json);
+                        console.log(this.props.companyName);
                         let newsCounter = {};
                         for (let i in json) {
                             let news = json[i];
@@ -61,11 +64,14 @@ export class StockPlot extends Component {
                                 newsCounter[date] += 1
                                 maxCount = Math.max(newsCounter[date], maxCount);
                         }
-        
+
                         let mergedPoints = {};
+                        console.log("newsCounter");
+                        console.log(newsCounter);
                         Object.keys(newsCounter).forEach(key => {
                             let merged = getNearstDate(stock, new Date(key));
-                            console.log(merged);
+                            // console.log("merged");
+                            // console.log(merged);
                             if (!mergedPoints[merged["x"]]) {
                                 mergedPoints[merged["x"]] = merged;
                                 mergedPoints[merged["x"]].size = 3;
@@ -75,11 +81,13 @@ export class StockPlot extends Component {
                         })
 
                         let points = Object.keys(mergedPoints).map(key => {
-                            console.log(mergedPoints[key]);
+                            // console.log(mergedPoints[key]);
                             return {...mergedPoints[key]}
                         })
         
                         this.setState({fakeNews: points});
+                        // console.log(this.state.points);
+                        // console.log(this.props.fakeNews);
                     })
                 })
 
@@ -93,7 +101,7 @@ export class StockPlot extends Component {
 
     render() {
         let { points, fakeNews } = this.state;
-        console.log(fakeNews);
+        // console.log(fakeNews);
         return <div style={{"padding": "10px"}}>
             <XYPlot style={{"zIndex": 999}} height={450} width={1080} >
                 <HorizontalGridLines/>
